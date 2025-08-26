@@ -1,17 +1,14 @@
 import streamlit as st
 import google.generativeai as genai
-import os
 
 # ==============================================================================
-# PENGATURAN API KEY DAN MODEL (PENTING! UBAH SESUAI KEBUTUHAN ANDA)
+# PENGATURAN API KEY DAN MODEL
 # ==============================================================================
 
-# Mengambil API key dari Streamlit Secrets atau variabel lingkungan.
-# Lebih aman daripada menuliskannya langsung di kode.
-# Caranya: Buat file .streamlit/secrets.toml di repo GitHub Anda.
-# Isinya: API_KEY = "AIza..."
+# Mengambil API key dari Streamlit Secrets.
+# Ini jauh lebih aman daripada menuliskannya di kode.
 try:
-    API_KEY = st.secrets["AIzaSyAaGSXReIvylnaZ7Ffqiyhaw0ez0K5CF1s"]
+    API_KEY = st.secrets["API_KEY"]
 except KeyError:
     st.error("Peringatan: API Key belum diatur. Harap tambahkan `API_KEY` ke Streamlit Secrets.")
     st.stop()
@@ -24,7 +21,6 @@ MODEL_NAME = 'gemini-1.5-flash'
 # ==============================================================================
 
 # Definisikan peran chatbot Anda di sini.
-# Ini adalah "instruksi sistem" yang akan membuat chatbot berperilaku sesuai keinginan Anda.
 INITIAL_CHATBOT_CONTEXT = [
     {
         "role": "user",
@@ -99,4 +95,3 @@ if prompt := st.chat_input("Tanyakan rumus fisika..."):
     st.session_state.messages.append({"role": "model", "parts": [model_response]})
     with st.chat_message("assistant"):
         st.markdown(model_response)
-
