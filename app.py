@@ -11,7 +11,7 @@ import os
 # Caranya: Buat file .streamlit/secrets.toml di repo GitHub Anda.
 # Isinya: API_KEY = "AIza..."
 try:
-    API_KEY = st.secrets["API_KEY"]
+    API_KEY = st.secrets["AIzaSyAaGSXReIvylnaZ7Ffqiyhaw0ez0K5CF1s"]
 except KeyError:
     st.error("Peringatan: API Key belum diatur. Harap tambahkan `API_KEY` ke Streamlit Secrets.")
     st.stop()
@@ -99,3 +99,4 @@ if prompt := st.chat_input("Tanyakan rumus fisika..."):
     st.session_state.messages.append({"role": "model", "parts": [model_response]})
     with st.chat_message("assistant"):
         st.markdown(model_response)
+
